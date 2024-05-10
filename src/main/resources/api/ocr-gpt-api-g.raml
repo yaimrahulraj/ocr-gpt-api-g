@@ -1,0 +1,53 @@
+#%RAML 1.0
+title: ocr-gpt-api-g
+version: v1
+baseUri: http://api.ocr-gpt.com/{version}
+
+
+/search:
+  description: Use search to make a search in gpt
+  /image:
+    description: search using image 
+    post:
+      body:
+        multipart/form-data:
+          properties:
+            query:
+              description: The image file to upload
+              type: file
+      responses:
+        200:
+          description: Successfully fetched the Output
+          body:
+            application/json:
+              example:
+                {
+                  "message": "Successfully fetched the Output"
+                }
+        400:
+          description: Bad Request
+
+
+
+  /text:
+    description: search using text 
+    post:
+      body:
+        application/json:
+          type: object
+          properties:
+            query:
+              type: string
+      responses:
+        200:
+          description: Successfully fetched the Output
+          body:
+            application/json:
+              example:
+                {
+                  "message": "Successfully fetched the Output"
+                }
+        400:
+          description: Bad Request
+  
+    
