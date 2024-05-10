@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	
+    <http:listener-config name="ocr-gpt-api-g-httpListenerConfig">
+        <http:listener-connection host="${http.host}" port="${http.port}" connectionIdleTimeout="${http.timeout}"/>
+    </http:listener-config>
+    <apikit:config name="ocr-gpt-api-g-config" api="ocr-gpt-api-g.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+	<global-property doc:name="Global Property" doc:id="1ecf0b38-ae30-4d5c-bdd7-ad8e5765b2e9" name="ext_prop" value="/app/data/nas/mule-esb/app-props/ocr-gpt-api-g" />
+	<configuration-properties doc:name="Configuration properties" doc:id="b1661f9f-4b09-4e05-8f6b-1ac80f54c8a5" file="${ext_prop}/ext-app-${env}.properties" />
+	<configuration-properties doc:name="Configuration properties" doc:id="ad898b64-d9df-4fae-bc81-6ccd739d622d" file="${ext_prop}/ext-app-${env}-secure.properties" />
+</mule>
